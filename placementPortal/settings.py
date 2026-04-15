@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'accounts',
     'jobs',
     'dashboard',
-    'core',
     'notifications',
     'profiles',
     'django.contrib.admin',
