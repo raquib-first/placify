@@ -1,0 +1,230 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+/* PAGE WRAPPER */
+.page-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px 60px;
+    background: #f7f9fc;
+    min-height: 100vh;
+}
+
+/* HEADER */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.4rem;
+    color: #1e293b;
+}
+
+.page-header p {
+    color: #64748b;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+/* JOB GRID */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* JOB CARD */
+.job-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.job-header {
+    margin-bottom: 12px;
+}
+
+.job-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.company-name {
+    display: block;
+    font-size: 0.9rem;
+    color: #475569;
+    margin-top: 4px;
+}
+
+/* META */
+.job-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 12px 0 18px;
+}
+
+/* ACTIONS */
+.job-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+}
+
+/* BASE BUTTON */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+/* APPLY BUTTON (PRIMARY) */
+.apply-btn {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.apply-btn:hover {
+    background: linear-gradient(135deg, #4338ca, #4f46e5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(79, 70, 229, 0.4);
+}
+
+/* APPLIED */
+.btn-applied {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+    cursor: not-allowed;
+}
+
+/* DISABLED */
+button[disabled],
+.apply-btn[disabled] {
+    background: #e5e7eb;
+    color: #6b7280;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* SAVE */
+.btn-save {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.btn-save:hover {
+    background: #e2e8f0;
+}
+
+/* SAVED */
+.btn-saved {
+    background: #fff7ed;
+    color: #c2410c;
+    cursor: default;
+}
+
+/* SECONDARY */
+.btn-secondary {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.btn-secondary:hover {
+    background: #ddd6fe;
+}
+
+/* VIEW DETAILS */
+.btn-view-details {
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+.btn-view-details:hover {
+    background-color: #1f2d3a;
+    transform: translateY(-2px);
+}
+
+/* COMPANY INFO */
+.company-info {
+    display: none;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.company-info .company-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+/* LINKS */
+.company-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.company-link:hover {
+    text-decoration: underline;
+}
+
+.view-profile-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #e5e7eb;
+    color: #374151;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.view-profile-btn:hover {
+    background-color: #d1d5db;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #64748b;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    font-weight: 600;
+}

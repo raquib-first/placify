@@ -1,0 +1,128 @@
+/* Base Page */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f5f7fb;
+}
+
+/* Container */
+.edit-job-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+}
+
+/* Card */
+.edit-job-card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 700px;
+    padding: 45px;
+    border-radius: 14px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    position: relative;
+}
+
+/* Accent Top Border */
+.edit-job-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background: #4f46e5;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+/* Heading */
+.edit-job-card h2 {
+    margin: 0 0 5px 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.job-title {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 35px;
+}
+
+/* Form spacing */
+.edit-job-form p {
+    margin-bottom: 22px;
+}
+
+/* Labels */
+.edit-job-form label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* Inputs */
+.edit-job-form input,
+.edit-job-form textarea,
+.edit-job-form select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+/* Input Focus = Controlled Color */
+.edit-job-form input:focus,
+.edit-job-form textarea:focus,
+.edit-job-form select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Button Section Divider */
+.button-group {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 12px;
+}
+
+/* Update Button  */
+.update-btn {
+    background: #4f46e5;
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.update-btn:hover {
+    background: #4338ca;
+}
+
+/* Back Button (Neutral) */
+.back-btn {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #e5e7eb;
+}

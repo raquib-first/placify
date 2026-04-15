@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Company Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'base_company.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/company_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'notifications/base.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <div class="dashboard-wrapper">
+
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>{{ company.company_name }}</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="{% url 'dashboard:company_dashboard' %}"
+                    class="sidebar-link {% if request.resolver_match.url_name == 'company_dashboard' %}active{% endif %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'profiles:profile_detail' %}"
+                    class="sidebar-link {% if request.resolver_match.url_name == 'profile_detail' %}active{% endif %}">
+                    View Profile
+                </a>
+
+                <a href="{% url 'jobs:create_job' %}"
+                    class="sidebar-link {% if request.resolver_match.url_name == 'create_job' %}active{% endif %}">
+                    Post New Job
+                </a>
+
+                {% if request.user.companyprofile %}
+                <a href="{% url 'profiles:company_public_profile' request.user.companyprofile.id %}"
+                    class="sidebar-link {% if request.resolver_match.url_name == 'company_public_profile' %}active{% endif %}">
+                    Public Profile
+                </a>
+                {% endif %}
+
+                <div class="profile-progress">
+                    <p>
+                        Profile completion:
+                        <strong>{{ company.completion_percentage }}%</strong>
+                    </p>
+                    <a href="{% url 'profiles:company_profile_edit' %}">
+                        Complete / Edit Profile
+                    </a>
+                </div>
+
+            </nav>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main-content">
+
+            <!-- ===== TOP BAR ===== -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h2>Welcome, {{ user.username }}</h2>
+                </div>
+
+                <div class="topbar-right">
+
+                    <!-- Notification -->
+                    <div class="notification-wrapper">
+
+                        <button id="notificationBell" class="icon-btn">
+                            🔔
+                            <span class="badge" id="notificationCount">
+                                {{ unread_count }}
+                            </span>
+                        </button>
+                    
+                        <div id="notificationDropdown" class="notif-dropdown hidden">
+                            <div id="notificationList"></div>
+                        </div>
+                    
+                    </div>
+
+                    <!-- ⚙️ Settings -->
+                    <div class="dropdown-wrapper">
+                        <button id="settingsBtn" class="icon-btn" aria-label="Settings">
+                            <span class="emoji">⚙️</span>
+                        </button>
+        
+                        <div id="settingsDropdown" class="dropdown-menu settings-menu hidden">
+                            <a href="{% url 'accounts:change_password' %}">Security</a>
+                            <a href="{% url 'profiles:privacy_settings' %}">Privacy</a>
+                            <hr>
+                            <a href="{% url 'profiles:help' %}">Help Center</a>
+                        </div>
+                    </div>
+
+                    <!-- Logout -->
+                    <a href="{% url 'accounts:logout' %}" class="logout">Logout</a>
+
+                </div>
+            </header>
+            <!-- ✅ PAGE CONTENT -->
+            {% block content %}{% endblock %}
+
+        </main>
+    </div>
+<script src="{% static 'js/notifications.js' %}"></script>
+<script src="{% static 'js/settings.js' %}" defer></script>
+
+</body>
+
+</html>

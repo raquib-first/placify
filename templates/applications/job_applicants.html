@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicants</title>
+    <link rel="stylesheet" href="{% static 'applications/job_applicants.css' %}">
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+        <div class="page-header">
+            <div class="header-left">
+                <h2>Applicants for <span>{{ job.title }}</span></h2>
+                <p>Total Applications: {{ applications.count }}</p>
+            </div>
+            <div class="header-right">
+                <a href="{% url 'dashboard:company_dashboard' %}" class="back-btn">
+                    Dashboard
+                </a>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="applicants-table">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Profile</th>
+                        <th>Resume</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for app in applications %}
+                    <tr>
+
+                        <!-- Student Name -->
+                        <td class="student-name">
+                            {{ app.student.user.username }}
+                        </td>
+
+                        <!-- View Profile -->
+                        <td>
+                            <a href="{% url 'profiles:student_public_profile' app.student.user.id %}" class="view-profile-btn">
+                                View Profile
+                            </a>
+                        </td>
+
+                        <!-- Resume -->
+                        <td>
+                            {% if app.student.resume %}
+                            <a class="resume-link" href="{{ app.student.resume.url }}" target="_blank">
+                                View Resume
+                            </a>
+                            {% else %}
+                            <span class="muted">Not Uploaded</span>
+                            {% endif %}
+                        </td>
+
+                        <!-- Status -->
+                        <td>
+                            <span class="status {{ app.status|lower }}">
+                                {{ app.status }}
+                            </span>
+                        </td>
+
+                        <!-- Actions -->
+                        <td class="actions">
+                            {% if app.status == 'APPLIED' %}
+                            <a class="btn shortlist"
+                                href="{% url 'applications:update_application_status' app.id 'SHORTLISTED' %}">
+                                Shortlist
+                            </a>
+
+                            <a class="btn reject"
+                                href="{% url 'applications:update_application_status' app.id 'REJECTED' %}">
+                                Reject
+                            </a>
+                            {% else %}
+                            <span class="muted">Action taken</span>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty">
+                            No applicants yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

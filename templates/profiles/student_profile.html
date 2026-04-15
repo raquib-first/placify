@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<title>Student Profile</title>
+<link rel="stylesheet" href="{% static 'profiles/student_profile.css' %}">
+
+<div class="profile-wrapper">
+    <!-- Header -->
+    <div class="profile-header">
+        <h1>
+            {% if profile.user.first_name %}
+            {{profile.user.first_name}} {{ profile.user.last_name}}
+            {% else %}
+            {{ profile.user.username }}
+            {% endif%}
+        </h1>
+        <p class="subtitle">
+             {{ profile.degree }} <strong>Degree</strong> • 
+             {{ profile.branch }} <strong>Branch</strong>
+        </p>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="profile-card">
+
+        <div class="info-grid">
+            <div class="info-item">
+                <span>Location</span>
+                <p>{{ profile.location }}</p>
+            </div>
+
+            <div class="info-item">
+                <span>University</span>
+                <p>{{ profile.university }}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Graduation Year</span>
+                <p>{{ profile.graduation_year }}</p>
+            </div>
+
+            <div class="info-item full">
+                <span>Skills</span>
+                <p>{{ profile.skills }}</p>
+            </div>
+            <div class="info-item">
+                <span>Email</span>
+                <p>{{ profile.user.email }}</p>
+            </div>
+        </div>
+
+        <!-- Resume Section -->
+        <div class="resume-section">
+            {% if profile.resume %}
+            <a href="{{ profile.resume.url }}" target="_blank" class="resume-btn">
+                📄 View Resume
+            </a>
+            {% else %}
+            <p class="no-resume">No resume uploaded</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- Completion -->
+    <div class="completion-card">
+        <p>Profile Completion</p>
+        <div class="progress-bar">
+            <div class="progress" style="width: {{ completion }}%;"></div>
+        </div>
+        <span>{{ completion }}%</span>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base_company.html" %}
+{% load static %}
+
+{% block content %}
+    <title>{{ profile.company_name }}</title>
+    <link rel="stylesheet" href="{% static 'profiles/company_profile.css' %}">
+
+<div class="company-container">
+
+    <!-- Header -->
+    <div class="company-header">
+        <h1>{{ profile.company_name }}</h1>
+        <p class="industry">{{ profile.industry }}</p>
+    </div>
+
+    <!-- Company Overview -->
+    <div class="company-card">
+        <h3>Company Overview</h3>
+
+        <div class="overview-grid">
+            {% if profile.company_size %}
+                <div><strong>Company Size:</strong> {{ profile.company_size }}</div>
+            {% endif %}
+
+            {% if profile.founded_year %}
+                <div><strong>Founded:</strong> {{ profile.founded_year }}</div>
+            {% endif %}
+
+            {% if profile.headquarters %}
+                <div><strong>Headquarters:</strong> {{ profile.headquarters }}</div>
+            {% endif %}
+
+            {% if profile.website %}
+                <div>
+                    <strong>Website:</strong>
+                    <a href="{{ profile.website }}" target="_blank">Visit</a>
+                </div>
+            {% endif %}
+
+            {% if profile.linkedin_page %}
+                <div>
+                    <strong>LinkedIn:</strong>
+                    <a href="{{ profile.linkedin_page }}" target="_blank">View Page</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- About Section -->
+    {% if profile.description %}
+    <div class="company-card">
+        <h3>About</h3>
+        <p class="description">
+            {{ profile.description }}
+        </p>
+    </div>
+    {% endif %}
+
+    <!-- HR Contact (Optional but Professional) -->
+    {% if profile.hr_name or profile.hr_email %}
+    <div class="company-card">
+        <h3>HR Contact</h3>
+        {% if profile.hr_name %}
+            <p><strong>Name:</strong> {{ profile.hr_name }}</p>
+        {% endif %}
+        {% if profile.hr_email %}
+            <p><strong>Email:</strong> {{ profile.hr_email }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Open Jobs -->
+    <div class="company-card">
+        <h3>Open Positions</h3>
+        
+        {% if jobs %}
+            {% for job in jobs %}
+                <div class="job-card">
+                    <h4>{{ job.title }}</h4>
+                    <a href="{% url 'jobs:company_view_job' job.id %}" class="view-job">
+                        View Job →
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No open positions currently.</p>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

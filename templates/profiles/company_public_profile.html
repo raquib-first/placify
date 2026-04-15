@@ -1,0 +1,68 @@
+{% extends base_template %}
+{% load static %}
+
+{% block content %}
+<title>{{ profile.company_name }} | Company Profile</title>
+
+<link rel="stylesheet" href="{% static 'profiles/company_public_profile.css' %}">
+<div class="page">
+
+    <!-- Header -->
+    <header class="company-header">
+        <h1>{{ profile.company_name|default:"Company Profile" }}</h1>
+        <p class="meta">
+            {{ profile.industry|default:"Industry not specified" }}
+            {% if profile.headquarters %} • {{ profile.headquarters }}{% endif %}
+        </p>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+        <section class="block">
+            <h2>About</h2>
+            <p>
+                {{ profile.description|default:"No description available." }}
+            </p>
+        </section>
+
+        <section class="block grid">
+            <div>
+                <label>Website</label>
+                {% if profile.website %}
+                <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+                {% else %}
+                <span>—</span>
+                {% endif %}
+            </div>
+
+            <div>
+                <label>LinkedIn</label>
+                {% if profile.linkedin_page %}
+                <a href="{{ profile.linkedin_page }}" target="_blank">View profile</a>
+                {% else %}
+                <span>—</span>
+                {% endif %}
+            </div>
+
+            <div>
+                <label>Company Size</label>
+                <span>{{ profile.company_size|default:"—" }}</span>
+            </div>
+
+            <div>
+                <label>Founded</label>
+                <span>{{ profile.founded_year|default:"—" }}</span>
+            </div>
+        </section>
+
+        <section class="block">
+            <h2>HR Contact</h2>
+            <p>{{ profile.hr_name|default:"—" }}</p>
+            <p>{{ profile.hr_email|default:"—" }}</p>
+        </section>
+
+    </main>
+
+</div>
+{% endblock %}

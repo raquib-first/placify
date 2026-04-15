@@ -1,0 +1,42 @@
+.resume-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.resume-container h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #111827;
+}
+
+.resume-card, .no-resume {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn.download {
+    background: #2563eb;
+    color: white;
+}
+.btn.update {
+    background: #10b981;
+    color: white;
+}
+
+.btn.upload {
+    background: #f59e0b;
+    color: white;
+}

@@ -1,0 +1,118 @@
+{% extends "base_company.html" %}
+{% load static %}
+
+{% block content %}
+
+<title>Create Job | Company Dashboard</title>
+<link rel="stylesheet" href="{% static 'jobs/create_job.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>Create Job Opening</h1>
+        <p>Post a job and reach thousands of qualified candidates</p>
+    </header>
+
+    <!-- Form -->
+    <form method="post" class="job-form">
+        {% csrf_token %}
+
+        <!-- Basic Info -->
+        <section class="form-section">
+            <h2>Basic Information</h2>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.location.label_tag }}
+                    {{ form.location }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.job_type.label_tag }}
+                    {{ form.job_type }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.remote_type.label_tag }}
+                    {{ form.remote_type }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Details -->
+        <section class="form-section">
+            <h2>Job Details</h2>
+
+            <div class="form-group">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+
+            <div class="form-group">
+                {{ form.responsibilities.label_tag }}
+                {{ form.responsibilities }}
+            </div>
+
+            <div class="form-group">
+                {{ form.qualifications.label_tag }}
+                {{ form.qualifications }}
+            </div>
+        </section>
+
+        <!-- Requirements -->
+        <section class="form-section">
+            <h2>Requirements</h2>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    {{ form.required_experience.label_tag }}
+                    {{ form.required_experience }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.skills.label_tag }}
+                    {{ form.skills }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits & Salary -->
+        <section class="form-section">
+            <h2>Compensation & Benefits</h2>
+
+            <div class="form-group">
+                {{ form.benefits.label_tag }}
+                {{ form.benefits }}
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    {{ form.salary.label_tag }}
+                    {{ form.salary }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.application_deadline.label_tag }}
+                    {{ form.application_deadline }}
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit -->
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">
+                🚀 Post Job
+            </button>
+        </div>
+
+    </form>
+
+</div>
+{% endblock%}

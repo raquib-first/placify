@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profiles/delete_project.css' %}">
+
+<div class="delete-wrapper">
+
+    <div class="delete-card">
+        <div class="icon">⚠️</div>
+
+        <h2>Delete Project</h2>
+
+        <p class="warning-text">
+            You are about to delete
+            <strong>"{{ project.title }}"</strong>.
+        </p>
+
+        <p class="sub-text">
+            This action cannot be undone.
+        </p>
+
+        <form method="POST" class="actions">
+            {% csrf_token %}
+
+            <button type="submit" class="btn danger">
+                🗑 Yes, Delete
+            </button>
+
+            <a href="{% url 'profiles:projects' %}" class="btn cancel">
+                Cancel
+            </a>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

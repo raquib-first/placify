@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Job - {{ job.title }}</title>
+    <link rel="stylesheet" href="{% static 'jobs/edit_job.css' %}">
+</head>
+<body>
+
+<div class="edit-job-container">
+
+    <div class="edit-job-card">
+        <h2>Edit Job</h2>
+        <p class="job-title">{{ job.title }}</p>
+
+        <form method="post" class="edit-job-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="button-group">
+                <button type="submit" class="update-btn">
+                    Update Job
+                </button>
+
+                <a href="{% url 'dashboard:company_dashboard' %}" class="back-btn">
+                    Dashboard
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

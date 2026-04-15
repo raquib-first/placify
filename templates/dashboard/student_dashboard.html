@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page CSS -->
+<link rel="stylesheet" href="{% static 'dashboard/student_dashboard.css' %}">
+
+<div class="dashboard-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+
+        <div class="menu">
+            <div class="menu-title">Profile</div>
+            <div class="submenu">
+                <a href="{% url 'profiles:student_profile' %}">View Profile</a>
+                <a href="{% url 'profiles:student_profile_edit' %}">Edit / Complete Profile</a>
+                <a href="{% url 'profiles:my_public_profile' %}">Public Profile</a>
+            </div>
+        </div>
+
+        <div class="menu">
+            <div class="menu-title">Jobs</div>
+            <div class="submenu">
+                <a href="{% url 'jobs:applied_jobs' %}">Applied Jobs</a>
+                <a href="{% url 'jobs:saved_jobs' %}">Saved Jobs</a>
+            </div>
+        </div>
+
+        <div class="menu">
+            <div class="menu-title">Resume & Projects</div>
+            <div class="submenu">
+                <a href="{% url 'profiles:manage_resume' %}">Resume</a>
+                <a href="{% url 'profiles:projects' %}">Projects</a>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-wrapper">
+            <div class="stat-card">
+                <p>Total Applications</p>
+                <h2>{{ total_applications }}</h2>
+            </div>
+
+            <div class="stat-card pending">
+                <p>Pending</p>
+                <h2>{{ pending_count }}</h2>
+            </div>
+
+            <div class="stat-card accepted">
+                <p>Accepted</p>
+                <h2>{{ accepted_count }}</h2>
+            </div>
+
+            <div class="stat-card rejected">
+                <p>Rejected</p>
+                <h2>{{ rejected_count }}</h2>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+        <!-- Profile Section -->
+        <div class="profile-summary">
+
+            <div class="profile-avatar">
+                {% if request.user.first_name %}
+                    {{ request.user.first_name|first|upper }}{{ request.user.last_name|first|upper }}
+                {% else %}
+                    {{ request.user.username|first|upper }}
+                {% endif %}
+            </div>
+
+            <div class="profile-text">
+                <div class="profile-header">
+                    <h2>
+                        {% if request.user.first_name %}
+                            {{ request.user.first_name }} {{ request.user.last_name }}
+                        {% else %}
+                            {{ request.user.username }}
+                        {% endif %}
+                    </h2>
+                    <span class="username">@{{ request.user.username }}</span>
+                </div>
+
+                <p class="bio">
+                    {% if request.user.studentprofile.bio %}
+                        {{ request.user.studentprofile.bio }}
+                    {% else %}
+                        Add a bio to make your profile stand out 🚀
+                    {% endif %}
+                </p>
+
+                <div class="profile-meta">
+
+                    <div class="meta-item">
+                        📍
+                        <span>{{ request.user.studentprofile.location|default:"Earth" }}</span>
+                    </div>
+
+                    <div class="meta-item">
+                        🎓
+                        <span>{{ request.user.studentprofile.university|default:"Not Available" }}</span>
+                    </div>
+
+                    <div class="meta-item">
+                        📘
+                        <span>{{ request.user.studentprofile.degree|default:"Not Available" }}</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-header">
+            <h3>Recent Applications</h3>
+            <p>Latest jobs you’ve applied to</p>
+        </div>
+
+        {% if applied_jobs %}
+        <div class="applied-jobs">
+            {% for application in applied_jobs %}
+            <div class="job-card">
+                <div class="job-info">
+                    <h4>{{ application.job.title }}</h4>
+                    <span class="company">{{ application.job.company.company_name }}</span>
+                </div>
+
+                <span class="status
+                    {% if application.status == 'APPLIED' %}applied{% endif %}
+                    {% if application.status == 'SHORTLISTED' %}shortlisted{% endif %}
+                    {% if application.status == 'REJECTED' %}rejected{% endif %}
+                ">
+                    {{ application.get_status_display }}
+                </span>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>You haven’t applied to any jobs yet.</p>
+            <span>Start browsing jobs and apply </span>
+        </div>
+        {% endif %}
+
+    </main>
+</div>
+
+{% endblock %}

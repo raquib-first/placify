@@ -1,0 +1,143 @@
+{% extends base_template %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profiles/help_page.css' %}">
+
+<div class="help-container">
+
+    <div class="help-card">
+
+        <h2>Help & Support</h2>
+        <p class="subtitle">Find answers or reach out to us</p>
+
+        <!-- FAQ SECTION -->
+        <div class="faq-section">
+            <h3>Frequently Asked Questions</h3>
+        
+            {% if request.user.role == request.user.Role.COMPANY %}
+        
+                <!-- COMPANY FAQ -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I post a job?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Go to Dashboard → Post Job and fill details.</div>
+                </div>
+        
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How can I view applicants?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Open your posted job and click on applicants.</div>
+                </div>
+        
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I edit a job post?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Yes, go to your job and click Edit.</div>
+                </div>
+        
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I manage my company profile?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Go to Profile → Edit Company Profile.</div>
+                </div>
+        
+            {% else %}
+        
+                <!-- STUDENT FAQ -->
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I apply for jobs?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Go to the Jobs page and click Apply.</div>
+                </div>
+        
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How do I edit my profile?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Go to Profile → Edit Profile.</div>
+                </div>
+        
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Who can see my profile?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">You can control this in Privacy Settings.</div>
+                </div>
+        
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>I forgot my password?</span>
+                        <span class="arrow">⌄</span>
+                    </button>
+                    <div class="faq-answer">Use the password reset option on login page.</div>
+                </div>
+        
+            {% endif %}
+        
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="contact-section">
+            <h3>Contact Us</h3>
+<!-- 
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="success-msg">{{ message }}</p>
+                {% endfor %}
+            {% endif %} -->
+
+            <form method="POST" class="contact-form">
+                {% csrf_token %}
+
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+
+                <button type="submit" class="send-btn">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FAQ Toggle Script -->
+<script>
+    const questions = document.querySelectorAll(".faq-question");
+
+    questions.forEach(q => {
+        q.addEventListener("click", () => {
+
+            const answer = q.nextElementSibling;
+
+            // Close others (accordion effect)
+            document.querySelectorAll(".faq-answer").forEach(a => {
+                if (a !== answer) a.classList.remove("active");
+            });
+
+            document.querySelectorAll(".faq-question").forEach(btn => {
+                if (btn !== q) btn.classList.remove("active");
+            });
+
+            // Toggle current
+            answer.classList.toggle("active");
+            q.classList.toggle("active");
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Company Profile</title>
+    <link rel="stylesheet" href="{% static 'profiles/company_profile_edit.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <h2>Edit Company Profile</h2>
+
+            <!-- Completion Bar -->
+            <p>Profile Completion: {{ profile.completion_percentage }}%</p>
+            <div class="progress-bar">
+                <div class="progress" style="width: {{ profile.completion_percentage }}%;"></div>
+            </div>
+
+            <form method="post" action="{% url 'profiles:company_profile_edit' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

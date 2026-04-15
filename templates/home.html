@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Portal | Bridge to Success</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <section class="hero" id="top">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1>Elevate Your Career Path</h1>
+                <p>The ultimate bridge between academic excellence and industry leadership. We simplify the hiring
+                    process for students and recruiters alike.</p>
+
+                <div class="hero-buttons">
+                    <a href="{% url 'accounts:login' %}" class="btn primary">Get Started</a>
+                    <div class="register-group">
+                        <a href="{% url 'accounts:student_register' %}" class="btn secondary">Student Join</a>
+                        <a href="{% url 'accounts:company_register' %}" class="btn secondary">Hire Talent</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat-item"><strong>500+</strong> Companies</div>
+        <div class="stat-item"><strong>10k+</strong> Students Placed</div>
+        <div class="stat-item"><strong>95%</strong> Placement Rate</div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <h2>Why Choose Our Portal?</h2>
+            <p>Our Placement Portal is a comprehensive ecosystem designed to streamline campus recruitment. We provide
+                students with a stage to showcase their technical prowess and soft skills, while offering companies a
+                curated pool of vetted talent ready to hit the ground running.</p>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-box">
+            <div class="icon">🎓</div>
+            <h2>For Students</h2>
+            <p>Build a professional digital portfolio, track your applications in real-time, and get matched with roles
+                that fit your skill set.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="icon">🏢</div>
+            <h2>For Companies</h2>
+            <p>Post vacancies, filter candidates using advanced search metrics, and manage the entire interview pipeline
+                from a single dashboard.</p>
+        </div>
+
+        <div class="feature-box">
+            <div class="icon">🔍</div>
+            <h2>Smart Discovery</h2>
+            <p>Our algorithms suggest job listings to students based on their profile strength and help recruiters find
+                the top 1% of talent.</p>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to take the next step?</h2>
+        <p>Join thousands of students and top-tier companies already using our platform.</p>
+        <a href="#top" class="btn primary">
+            Create Free Account
+        </a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Placify. All rights reserved. Empowering the next generation of professionals.</p>
+    </footer>
+
+</body>
+
+</html>

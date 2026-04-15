@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profiles/user_project.css' %}">
+
+<div class="projects-container">
+    {% if projects %}
+    <div class="projects-header">
+        <h2> My Projects</h2>
+        <a href="{% url 'profiles:add_project' %}" class="btn add">
+            + Add Project
+        </a>
+    </div>
+        <div class="project-grid">
+            {% for project in projects %}
+                <div class="project-card">
+
+                    <div class="card-header">
+                        <h3>{{ project.title }}</h3>
+                    </div>
+
+                    <p class="description">
+                        {{ project.description }}
+                    </p>
+
+                    <p class="tech">
+                        <span>🛠 Tech:</span> {{ project.tech_stack }}
+                    </p>
+
+                    <div class="links">
+                        {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" class="link github">
+                                GitHub
+                            </a>
+                        {% endif %}
+
+                        {% if project.live_link %}
+                            <a href="{{ project.live_link }}" target="_blank" class="link live">
+                                Live
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <div class="actions">
+                        <a href="{% url 'profiles:edit_project' project.id %}" class="edit">
+                            ✏ Edit
+                        </a>
+                        <a href="{% url 'profiles:delete_project' project.id %}" class="delete">
+                            🗑 Delete
+                        </a>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No projects added yet.</p>
+            <a href="{% url 'profiles:add_project' %}" class="btn add">
+                Add Your First Project
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

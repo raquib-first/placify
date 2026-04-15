@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page CSS -->
+<link rel="stylesheet" href="{% static 'jobs/applied_jobs.css' %}">
+
+<div class="applied-jobs-page">
+    <div class="page-wrapper">
+
+        <!-- Header -->
+        <header class="page-header">
+            <h1>Applied Jobs</h1>
+            <p>Track the status of your job applications</p>
+        </header>
+
+        {% if applications %}
+        <section class="jobs-grid">
+
+            {% for application in applications %}
+            <article class="job-card">
+
+                <div class="job-header">
+                    <h3 class="job-title">
+                        {{ application.job.title }}
+                    </h3>
+                    <span class="company-name">
+                        {{ application.job.company.company_name }}
+                    </span>
+                </div>
+
+                <div class="job-meta">
+                    <span class="job-location">
+                        📍 {{ application.job.location|default:"Not specified" }}
+                    </span>
+
+                    <span class="applied-date">
+                        Applied {{ application.created_at|timesince }} ago
+                    </span>
+                </div>
+
+                <!-- ✅ FIXED ALIGNMENT ROW -->
+                <div class="job-bottom">
+
+                    <div class="job-actions">
+                        <a href="{% url 'jobs:company_view_job' application.job.id %}" class="btn btn-view-details">
+                            View Job
+                        </a>
+
+                        <button type="button" class="btn btn-secondary about-btn"
+                            onclick="toggleCompany({{ application.job.id }})">
+                            About us
+                        </button>
+                    </div>
+
+                    <div class="job-status">
+                        {% if application.status == 'APPLIED' %}
+                        <span class="status status-applied">Applied</span>
+                        {% elif application.status == 'SHORTLISTED' %}
+                        <span class="status status-shortlisted">Shortlisted</span>
+                        {% elif application.status == 'REJECTED' %}
+                        <span class="status status-rejected">Rejected</span>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                <!-- Company Info -->
+                <div class="company-info" id="company-{{ application.job.id }}">
+                    <p>{{ application.job.company.description }}</p>
+
+                    <div class="company-actions">
+                        {% if application.job.company.website %}
+                        <a href="{{ application.job.company.website }}" target="_blank" class="company-link">
+                            🌐 Visit Website
+                        </a>
+                        {% endif %}
+
+                        <a href="{% url 'profiles:company_public_profile' application.job.company.id %}"
+                            class="view-profile-btn">
+                            View Company
+                        </a>
+                    </div>
+                </div>
+
+            </article>
+            {% endfor %}
+
+        </section>
+        {% else %}
+        <div class="empty-state">
+            <p>You haven’t applied to any jobs yet</p>
+            <span>Start applying to jobs to see them here</span>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+<!-- JS -->
+<script>
+    function toggleCompany(jobId) {
+        const box = document.getElementById("company-" + jobId);
+
+        if (box.style.display === "none" || box.style.display === "") {
+            box.style.display = "block";
+        } else {
+            box.style.display = "none";
+        }
+    }
+</script>
+
+{% endblock %}

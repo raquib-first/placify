@@ -1,0 +1,134 @@
+/* ===== Wrapper ===== */
+.form-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ===== Card ===== */
+.form-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(14px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Header ===== */
+.form-card h2 {
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* ===== Form ===== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* ===== Labels ===== */
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+/* ===== Inputs ===== */
+input, textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+
+    transition: all 0.25s ease;
+}
+
+/* Focus effect */
+input:focus, textarea:focus {
+    border-color: #6366f1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* Textarea */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ===== Buttons ===== */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+/* Save button */
+.btn.save {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+}
+
+/* Cancel button */
+.btn.cancel {
+    background: #e5e7eb;
+    color: #333;
+}
+
+.btn.cancel:hover {
+    background: #d1d5db;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+}

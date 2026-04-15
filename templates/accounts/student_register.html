@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Placify | Student Registration</title>
+    <link rel="stylesheet" href="{% static 'accounts/student_register.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="register-card">
+        <div class="panel-info">
+            <div class="info-content">
+                <div class="brand">
+                    <span class="brand-dot"></span>
+                    <h1 class="logo">Placify</h1>
+                </div>
+                
+                <div class="hero-text">
+                    <h2>The future of hiring starts <span class="highlight">here.</span></h2>
+                    <p>Create your profile to access exclusive job openings from the world's leading tech companies.</p>
+                </div>
+
+                <div class="feature-pills">
+                    <span class="pill">🚀 Fast Apply</span>
+                    <span class="pill">📈 Skill Tracking</span>
+                    <span class="pill">💼 AI Matching</span>
+                </div>
+            </div>
+            <div class="floating-shapes">
+                <div class="shape circle-1"></div>
+                <div class="shape circle-2"></div>
+            </div>
+        </div>
+
+        <div class="panel-form">
+            <div class="form-inner">
+                <header class="form-header">
+                    <h2>Student Registration</h2>
+                    <p>Enter your credentials to get started</p>
+                </header>
+
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="input-wrapper">
+                        <label>Username</label>
+                        {{ form.username }}
+                        <i class="input-icon">👤</i>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>Email Address</label>
+                        {{ form.email }}
+                        <i class="input-icon">✉️</i>
+                    </div>
+
+                    <div class="input-grid">
+                        <div class="input-wrapper">
+                            <label>Password</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="input-wrapper">
+                            <label>Confirm</label>
+                            {{ form.password2 }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Create Account</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </form>
+
+                <footer class="form-footer">
+                    <p>Already a member? <a href="{% url 'accounts:login' %}">Login As Student</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

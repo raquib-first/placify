@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<title>Saved Jobs</title>
+<link rel="stylesheet" href="{% static 'jobs/saved_jobs.css' %}">
+
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>Saved Jobs</h1>
+        <p>Jobs you bookmarked to apply later</p>
+    </header>
+
+    {% if saved_jobs %}
+    <section class="jobs-grid">
+
+        {% for saved in saved_jobs %}
+        <article class="job-card">
+
+            <div class="job-header">
+                <h3 class="job-title">
+                    {{ saved.job.title }}
+                </h3>
+                <span class="company-name">
+                    {{ saved.job.company.company_name }}
+                </span>
+            </div>
+
+            <div class="job-meta">
+                <span class="job-location">
+                    📍 {{ saved.job.location|default:"Not specified" }}
+                </span>
+
+                <span class="saved-date">
+                    Saved {{ saved.created_at|timesince }} ago
+                </span>
+            </div>
+
+            <div class="job-actions">
+                {% if saved.job.id not in applied_job_ids %}
+                <a href="{% url 'applications:apply_job' saved.job.id %}">
+                    Apply
+                </a>
+                {% else %}
+                <span>Already Applied</span>
+                {% endif %}
+
+                <a href="{% url 'jobs:unsave_job' saved.job.id%}" class="btn btn-remove">
+                    Remove
+                </a>
+            </div>
+
+        </article>
+        {% endfor %}
+
+    </section>
+    {% else %}
+    <div class="empty-state">
+        <p>No saved jobs yet</p>
+        <span>Bookmark jobs to apply later</span>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

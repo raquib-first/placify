@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profile/manage_resume.css' %}">
+<div class="resume-container">
+    <h2>Your Resume</h2>
+
+    {% if profile.resume %}
+        <div class="resume-card">
+            <p><strong>File:</strong> {{ profile.resume.name }}</p>
+
+            <a href="{{ profile.resume.url }}" target="_blank" class="btn download">
+                View / Download Resume
+            </a>
+
+            <a href="{% url 'profiles:student_profile_edit' %}" class="btn upload">
+                Upload Resume
+            </a>
+        </div>
+    {% else %}
+        <div class="no-resume">
+            <p>No resume uploaded yet.</p>
+
+            <a href="{% url 'profiles:student_profile_edit' %}" class="btn upload">
+                Upload Resume
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Jobs | Company Dashboard</title>
+    <link rel="stylesheet" href="{% static 'jobs/company_jobs.css' %}">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-text">
+            <h1>My Posted Jobs</h1>
+            <p>Manage your job listings and view applicants</p>
+        </div>
+    
+        <a href="{% url 'dashboard:company_dashboard' %}" class="dashboard-link">
+            Dashboard
+        </a>
+    </div>
+
+    {% if jobs %}
+        <div class="jobs-grid">
+            {% for job in jobs %}
+                <div class="job-card">
+                    <h3 class="job-title">{{ job.title }}</h3>
+
+                    <p class="job-meta">
+                        📍 {{ job.location|default:"Location not specified" }}
+                    </p>
+
+                    <div class="job-actions">
+                        {% if job.id %}
+                            <a href="{% url 'applications:job_applicants' job.id %}"
+                               class="btn btn-primary">
+                                View Applicants
+                            </a>
+                        {% else %}
+                            <span class="error-text">Job ID missing</span>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No jobs posted yet.</p>
+            <a href="{% url 'jobs:create_job' %}" class="btn btn-primary">
+                + Create Your First Job
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placify | Welcome Back</title>
+    <link rel="stylesheet" href="{% static 'accounts/login.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="page-wrapper">
+    <div class="login-card">
+        
+        <div class="login-left">
+            <div class="left-content">
+                <div class="brand-group">
+                    <div class="brand-logo-icon">P</div>
+                    <h1 class="logo">Placify</h1>
+                </div>
+                
+                <div class="welcome-text">
+                    <h2>Your next big <span class="highlight">opportunity</span> is waiting.</h2>
+                    <p>Log in to access your personalized dashboard, track applications, and engage with the community.</p>
+                </div>
+
+                <div class="login-features">
+                    <div class="feat-item">
+                        <span class="feat-icon">⚡</span>
+                        <span>One-click applications</span>
+                    </div>
+                    <div class="feat-item">
+                        <span class="feat-icon">🛡️</span>
+                        <span>Secure verified profiles</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mesh-gradient"></div>
+        </div>
+
+        <div class="login-right">
+            <div class="form-container">
+                <header class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Please enter your login details</p>
+                </header>
+
+                <form method="post" class="login-form">
+                    {% csrf_token %}
+                    
+                    {% if form.errors or form.non_field_errors %}
+                    <div class="error-alert">
+                        Invalid username or password.
+                    </div>
+                    {% endif %}
+
+                    <div class="input-group">
+                        <label for="id_username">Username</label>
+                        <div class="input-field">
+                            <span class="icon">👤</span>
+                            {{ form.username }}
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="id_password">Password</label>
+                            <a href="{% url 'password_reset' %}" class="forgot-pass">
+                                Forgot?
+                            </a>
+                        </div>
+                        <div class="input-field">
+                            <span class="icon">🔒</span>
+                            {{ form.password }}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        Log In to Account
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>New to Placify?</span>
+                </div>
+
+                <div class="register-options">
+                    <a href="{% url 'accounts:student_register' %}" class="reg-btn student">
+                        Join as Student
+                    </a>
+                    <a href="{% url 'accounts:company_register' %}" class="reg-btn company">
+                        Hire Talent
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

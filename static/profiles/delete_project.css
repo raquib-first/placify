@@ -1,0 +1,101 @@
+/* ===== Wrapper ===== */
+.delete-wrapper {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* ===== Card ===== */
+.delete-wrapper .delete-card {
+    max-width: 450px;
+    width: 100%;
+    padding: 30px;
+    border-radius: 18px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Icon ===== */
+.delete-wrapper .icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* ===== Headings ===== */
+.delete-wrapper h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* ===== Text ===== */
+.delete-wrapper .warning-text {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.delete-wrapper .warning-text strong {
+    color: #dc2626;
+}
+
+.delete-wrapper .sub-text {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* ===== Actions ===== */
+.delete-wrapper .actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* ===== Buttons (SCOPED) ===== */
+.delete-wrapper .btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+/* Danger Button */
+.delete-wrapper .btn.danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-wrapper .btn.danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+}
+
+/* Cancel Button */
+.delete-wrapper .btn.cancel {
+    background: #e5e7eb;
+    color: #333;
+}
+
+.delete-wrapper .btn.cancel:hover {
+    background: #d1d5db;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 500px) {
+    .delete-wrapper .actions {
+        flex-direction: column;
+    }
+
+    .delete-wrapper .delete-card {
+        padding: 20px;
+    }
+}

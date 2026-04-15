@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Placify{% endblock %}</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+</head>
+<body>
+
+<header class="topbar">
+    <nav class="nav-container">
+        <div class="nav-left">
+            <a href="{% url 'dashboard:student_dashboard' %}" class="brand">
+                <span class="brand-icon">P</span>
+                <span class="brand-name">Placify</span>
+            </a>
+            <span class="tagline">Student Portal</span>
+        </div>
+
+        <div class="nav-right">
+            <a href="{% url 'jobs:student_job_list' %}" class="nav-link">Browse Jobs</a>
+
+            <div class="dropdown-wrapper">
+                <button id="notificationBell" class="icon-btn" aria-label="Notifications">
+                    <span class="emoji">🔔</span>
+                    {% if unread_count > 0 %}
+                    <span class="badge" id="notificationCount">{{ unread_count }}</span>
+                    {% endif %}
+                </button>
+
+                <div id="notificationDropdown" class="dropdown-menu notification-menu hidden">
+                    <div class="dropdown-header">Notifications</div>
+                    <div class="dropdown-scroll" id="notificationList">
+                        {% if notifications %}
+                            {% for n in notifications %}
+                            <div class="notification-item {% if not n.is_read %}unread{% endif %}" data-id="{{ n.id }}">
+                                <strong>{{ n.title }}</strong>
+                                <p>{{ n.message|truncatechars:60 }}</p>
+                                <small>{{ n.created_at|date:"M d, H:i" }}</small>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="empty-state">All caught up!</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown-wrapper">
+                <button id="settingsBtn" class="icon-btn" aria-label="Settings">
+                    <span class="emoji">⚙️</span>
+                </button>
+
+                <div id="settingsDropdown" class="dropdown-menu settings-menu hidden">
+                    <a href="{% url 'accounts:edit_account' %}">Edit Profile</a>
+                    <a href="{% url 'accounts:change_password' %}">Security</a>
+                    <a href="{% url 'profiles:privacy_settings' %}">Privacy</a>
+                    <hr>
+                    <a href="{% url 'profiles:help' %}">Help Center</a>
+                </div>
+            </div>
+            <a href="{% url 'accounts:logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+</header>
+
+<main class="page-content">
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+<script src="{% static 'js/notifications.js' %}"></script>
+<script src="{% static 'js/settings.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+:root {
+    --bg-main: #f8f9fb;
+    --card-bg: #ffffff;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --border-light: #e5e7eb;
+
+    --primary: #2563eb;
+    --danger: #dc2626;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+    background: var(--bg-main);
+    color: var(--text-dark);
+}
+
+/* Layout */
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 20px;
+}
+
+/* Header */
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin-top: 6px;
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+/* Grid */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* Card */
+.job-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid var(--border-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+/* Header */
+.job-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.company-name {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Meta */
+.job-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 12px 0 16px;
+}
+
+/* Actions */
+.job-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-apply {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-apply:hover {
+    background: #1e4fd8;
+}
+
+.btn-remove {
+    background: rgba(220, 38, 38, 0.1);
+    color: var(--danger);
+}
+
+.btn-remove:hover {
+    background: rgba(220, 38, 38, 0.18);
+}
+
+/* Empty */
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state p {
+    font-size: 18px;
+    margin-bottom: 6px;
+}

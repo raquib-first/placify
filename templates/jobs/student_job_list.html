@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'jobs/student_job_list.css' %}">
+<div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+        <h1>Browse Jobs</h1>
+        <p>Find opportunities that match your skills</p>
+    </header>
+
+    {% if jobs %}
+    <section class="jobs-grid">
+
+        {% for job in jobs %}
+        <article class="job-card">
+
+            <div class="job-header">
+                <h3 class="job-title">{{ job.title }}</h3>
+                <span class="company-name">
+                    {{ job.company.company_name }}
+                </span>
+            </div>
+
+            <div class="job-meta">
+                <span class="job-location">
+                    📍 {{ job.location|default:"Location not specified" }}
+                </span>
+                <span class="job-date">
+                    Posted {{ job.created_at|timesince }} ago
+                </span>
+            </div>
+
+            <div class="job-actions">
+
+                {% if job.id in applied_job_ids %}
+                <button class="btn btn-applied" disabled>
+                    ✓ Applied
+                </button>
+                {% else %}
+                {% if job.is_open %}
+                <a href="{% url 'applications:apply_job' job.id %}" class="btn apply-btn"> Apply now</a>
+                {% else %}
+                <button class="btn apply-btn" disabled>Applications Closed</button>
+                {% endif %}
+                {% endif %}
+
+                <!-- Save Job button -->
+                {% if saved_job_ids and job.id in saved_job_ids %}
+                <button class="btn btn-saved" disabled>
+                    ⭐ Saved
+                </button>
+                {% else %}
+                <a href="{% url 'jobs:save_job' job.id %}" class="btn btn-save">
+                    Save
+                </a>
+                {% endif %}
+                <a href="{% url 'jobs:company_view_job' job.id %}" class="btn btn-view-details">
+                    View Job
+                </a>
+
+                <!-- About Company button -->
+                <button type="button" class="btn btn-secondary about-btn" onclick="toggleCompany({{ job.id }})">
+                    About us
+                </button>
+
+            </div>
+
+            <!-- Company info (hidden by default) -->
+            <div class="company-info" id="company-{{ job.id }}">
+                <p>{{ job.company.description }}</p>
+
+                <div class="company-actions">
+                    {% if job.company.website %}
+                    <a href="{{ job.company.website }}" target="_blank" class="company-link">
+                        🌐 Visit Website
+                    </a>
+                    {% endif %}
+
+                    <a href="{% url 'profiles:company_public_profile' job.company.id %}" class="view-profile-btn">
+                        View Company
+                    </a>
+                </div>
+
+            </div>
+
+        </article>
+        {% endfor %}
+
+    </section>
+    {% else %}
+    <div class="empty-state">
+        <p>No jobs available right now</p>
+        <span>Check back later for new opportunities</span>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    function toggleCompany(jobId) {
+        const box = document.getElementById("company-" + jobId);
+
+        if (box.style.display === "none" || box.style.display === "") {
+            box.style.display = "block";
+        } else {
+            box.style.display = "none";
+        }
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends base_template %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'jobs/company_view_job.css' %}">
+
+<div class="job-wrapper">
+
+    <!-- 🔵 HERO SECTION -->
+    <div class="job-hero">
+        <div>
+            <h1>{{ job.title }}</h1>
+            <p class="company-name">{{ job.company.name }}</p>
+            <p class="meta">
+                Posted on {{ job.created_at|date:"F d, Y" }}
+            </p>
+        </div>
+
+        {% if request.user == job.company.user %}
+        <a href="{% url 'jobs:edit_job' job.id %}" class="btn primary">
+            Edit Job
+        </a>
+        {% endif %}
+    </div>
+
+    <!-- 🟢 QUICK INFO (CHIPS) -->
+    <div class="job-tags">
+        {% if job.job_type %}<span>{{ job.job_type }}</span>{% endif %}
+        {% if job.remote_type %}<span>{{ job.remote_type }}</span>{% endif %}
+        {% if job.location %}<span>{{ job.location }}</span>{% endif %}
+        {% if job.required_experience %}<span>{{ job.required_experience }}</span>{% endif %}
+        {% if job.salary %}<span>₹ {{ job.salary }}</span>{% endif %}
+    </div>
+
+    <!-- 🟡 MAIN GRID -->
+    <div class="job-grid">
+
+        <!-- LEFT SIDE -->
+        <div class="job-main">
+
+            {% if job.description %}
+            <div class="card">
+                <h3>Description</h3>
+                <p>{{ job.description }}</p>
+            </div>
+            {% endif %}
+
+            {% if job.responsibilities %}
+            <div class="card">
+                <h3>Responsibilities</h3>
+                <ul>
+                    {% for item in job.responsibilities.splitlines %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if job.skills %}
+            <div class="card">
+                <h3>Required Skills</h3>
+                <ul>
+                    {% for skill in job.skills.splitlines %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if job.qualifications %}
+            <div class="card">
+                <h3>Qualifications</h3>
+                <ul>
+                    {% for q in job.qualifications.splitlines %}
+                        <li>{{ q }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if job.benefits %}
+            <div class="card">
+                <h3>Benefits</h3>
+                <ul>
+                    {% for b in job.benefits.splitlines %}
+                        <li>{{ b }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <!-- RIGHT SIDE (SIDEBAR) -->
+        <div class="job-sidebar">
+
+            <div class="card sticky">
+
+                <h3>Job Info</h3>
+
+                {% if job.application_deadline %}
+                <p><strong>Deadline:</strong> {{ job.application_deadline }}</p>
+                {% endif %}
+
+                <p>
+                    <strong>Status:</strong>
+                    {% if job.is_open %}
+                        <span class="active">Active</span>
+                    {% else %}
+                        <span class="closed">Closed</span>
+                    {% endif %}
+                </p>
+
+                {% if request.user != job.company.user %}
+                {% if saved.job.id not in applied_job_ids %}
+                <a href="{% url 'applications:apply_job' saved.job.id %}">
+                    Apply
+                </a>
+                {% else %}
+                <span>Already Applied</span>
+                {% endif %}
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

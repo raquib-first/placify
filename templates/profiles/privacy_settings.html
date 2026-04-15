@@ -1,0 +1,64 @@
+{% extends base_template %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'profiles/privacy_settings.css' %}">
+
+<div class="settings-container">
+
+    <div class="settings-card">
+        <h2>Privacy Settings</h2>
+        <p class="subtitle">Control who can see your profile and information</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Profile Visibility -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <h4>Public Profile</h4>
+                    <p>Allow others to view your profile</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" name="is_public" {% if profile.is_public %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- Email Visibility -->
+            <div class="setting-item">
+                <div class="setting-text">
+                    <h4>Show Email</h4>
+                    <p>Display your email on profile</p>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" name="show_email" {% if profile.show_email %}checked{% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            {% if is_student %}
+            <!-- Project Visibility -->
+            <div class="setting-item column">
+                <div class="setting-text">
+                    <h4>Project Visibility</h4>
+                    <p>Choose who can see your projects</p>
+                </div>
+
+                <select name="project_visibility" class="select-box">
+                    <option value="all" {% if profile.project_visibility == "all" %}selected{% endif %}>Everyone</option>
+                    <option value="recruiters" {% if profile.project_visibility == "recruiters" %}selected{% endif %}>Only Recruiters</option>
+                    <option value="private" {% if profile.project_visibility == "private" %}selected{% endif %}>Only Me</option>
+                </select>
+            </div>
+            {% endif %}
+
+            <button type="submit" class="save-btn">Save Changes</button>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
